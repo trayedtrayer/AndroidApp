@@ -26,9 +26,13 @@ class AstAlgorithm {
             closedList.add(cur)
             var neigh = GetNeighbours(grid, cur, finish.point)
             neigh.forEach { neighbor ->
-                if(closedList.none {it.cell == neighbor.cell} && openList.none {it.cell == neighbor.cell} && neighbor.cell.canBeReached) {
+                val existing = openList.find { it.cell == neighbor.cell }
+                if(existing == null && neighbor.cell.canBeReached) {
                     neighbor.parent = cur
                     openList.add(neighbor)
+                } else if(existing != null && neighbor.distWent < existing.distWent) {
+                    existing.distWent = neighbor.distWent
+                    existing.parent = cur
                 }
             }
         }
@@ -84,11 +88,11 @@ class AstAlgorithm {
     {
         var listWent : MutableList<Point> = mutableListOf<Point>()
         var tempNode : AstNode? = node
-        while(tempNode?.parent!=null)
+        while(tempNode!=null)
         {
             listWent.add(tempNode.cell.point)
             tempNode = tempNode.parent
         }
-        return listWent
+        return listWent.reversed()
     }
 }
