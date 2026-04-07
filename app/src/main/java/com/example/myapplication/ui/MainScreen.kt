@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.myapplication.ui.ant.antScreen
+import com.example.myapplication.ui.navigation.ClusteringScreen
 import com.example.myapplication.ui.navigation.NavScreen
 import com.example.myapplication.ui.navigation.decisionTreeScreen
 
@@ -46,9 +48,9 @@ fun MainScreen() {
             NavScreen()
         }
         //"neural" -> NeuralScreen(onBack = { currentScreen = "home" })
-        "clustering" -> PlaceholderScreen("Кластеризация", { currentScreen = "home" })
+        "clustering" -> ClusteringScreen(onBack = { currentScreen = "home" })
         "genetic" -> PlaceholderScreen("Генетический алгоритм", { currentScreen = "home" })
-        "ant" -> PlaceholderScreen("Муравьиный алгоритм", { currentScreen = "home" })
+        "ant" -> antScreen(onBack = { currentScreen = "home" })
         "decision_tree" -> decisionTreeScreen(onBack = { currentScreen = "home" })
     }
 }
